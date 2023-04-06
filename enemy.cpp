@@ -1,15 +1,21 @@
 #include "Enemy.h"
 #include <QTimer>
-#include <QGraphicsScene>
 #include <QDebug>
 #include <stdlib.h>
+#include "Game.h"
+#include <QGraphicsPixmapItem>
 
-Enemy::Enemy()
+extern Game * game;
+
+Enemy::Enemy(QGraphicsItem * parent): QObject(), QGraphicsPixmapItem(parent)
 {
+    //Creando la imagen.
+    setPixmap(QPixmap(":/images/enemy.png"));
+    setScale(0.25);
+
+
     int random_number = (rand() % 550);
-    qDebug()<< random_number;
     setPos (750, random_number);
-    setRect(0,0,100,100);
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(move()));
 
@@ -17,10 +23,12 @@ Enemy::Enemy()
 
 }
 void Enemy::move(){
+
     setPos(x()-5,y());
-    if (pos().x() > 800){
+    if (pos().x() < 0){
+        game->health->reducir();
         scene()->removeItem(this);
-        qDebug() << "Eliminada";
         delete this;
+
     }
 }

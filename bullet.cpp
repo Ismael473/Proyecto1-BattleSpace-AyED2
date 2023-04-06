@@ -5,7 +5,11 @@
 
 Bullet::Bullet()
 {
-    setRect(0,0,50,10);
+    setPixmap(QPixmap(":/images/bullet.png"));
+    setScale(0.05);
+
+
+
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(move()));
 
@@ -16,7 +20,6 @@ void Bullet::move(){
     setPos(x()+10,y());
     if (pos().x() > 800){
         scene()->removeItem(this);
-        qDebug() << "Eliminada";
         delete this;
     }
 }
