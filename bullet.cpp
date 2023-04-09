@@ -9,7 +9,6 @@ Bullet::Bullet()
     setScale(0.05);
 
 
-
     QTimer * timer = new QTimer();
     connect(timer,SIGNAL(timeout()), this,SLOT(move()));
 

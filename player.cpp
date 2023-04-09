@@ -5,6 +5,7 @@
 #include "Bullet.h"
 #include "Enemy.h"
 #include <QGraphicsPixmapItem>
+//#include "lista.cpp"
 
 Player::Player(QGraphicsItem * parent): QGraphicsPixmapItem(parent){
 
@@ -37,9 +38,9 @@ void Player::keyPressEvent(QKeyEvent *event)
 }
 
 void Player::spawn(){
-    //Linkedlist list;
+    //List l;
     Enemy * enemy = new Enemy();
     scene()->addItem(enemy);
-    //list.insertNode(enemy);
+    //l.insertlist(enemy);
 
 }

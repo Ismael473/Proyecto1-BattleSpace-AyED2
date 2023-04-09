@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "Game.h"
 #include <QGraphicsPixmapItem>
+//#include "list.hpp"
 
 extern Game * game;
 
@@ -12,6 +13,7 @@ Enemy::Enemy(QGraphicsItem * parent): QObject(), QGraphicsPixmapItem(parent)
     //Creando la imagen.
     setPixmap(QPixmap(":/images/enemy.png"));
     setScale(0.25);
+
 
 
     int random_number = (rand() % 550);
