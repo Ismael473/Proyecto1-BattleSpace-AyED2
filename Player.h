@@ -9,8 +9,10 @@ class Player: public QObject, public QGraphicsPixmapItem{
 public:
     Player(QGraphicsItem * parent=0);
     void keyPressEvent(QKeyEvent * event);
+    void delay();
 public slots:
-    void spawn();
+    void spawnEasy();
+    void spawnMedium();
 };
 
 #endif // PLAYER_H

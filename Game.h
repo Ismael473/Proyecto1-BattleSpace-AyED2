@@ -5,7 +5,7 @@
 #include <QWidget>
 #include <QGraphicsScene>
 #include "Player.h"
-#include "Score.h"
+#include "Wave.h"
 #include "Health.h"
 
 
@@ -19,11 +19,10 @@ public:
 
     QGraphicsScene *scene;
     Player * player;
-    Score * score;
+    Wave * wave;
     Health * health;
 
 public slots:
-    void start();
     void easy();
     void medium();
     void hard();

@@ -8,8 +8,14 @@ class Enemy: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
 public:
     Enemy(QGraphicsItem * parent=0);
+    int getVida();
+    void setVida(int nvida);
+    void reducir();
 public slots:
     void move();
+private:
+    int vida;
+
 };
 
 

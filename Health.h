@@ -10,6 +10,7 @@ public:
     int getHealth();
 private:
     int health;
+    int enemyHealth;
 };
 
 #endif // HEALTH_H

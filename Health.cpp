@@ -5,9 +5,10 @@
 Health::Health(QGraphicsItem *parent): QGraphicsTextItem(parent)
 {
     health = 3;
+    enemyHealth = 5;
 
     setPlainText("Health: " + QString::number(health));
-    setDefaultTextColor(Qt::red);
+    setDefaultTextColor(Qt::yellow);
     setFont(QFont("times", 16));
 
 }

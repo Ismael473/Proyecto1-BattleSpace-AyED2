@@ -18,19 +18,19 @@ SOURCES += main.cpp \
     enemy.cpp \
     game.cpp \
     player.cpp \
-    Score.cpp \
     Health.cpp \
-    Button.cpp
+    Button.cpp \
+    ListaEnemy.cpp \
+    Wave.cpp
 
 HEADERS  += \
     Bullet.h \
-    list.hpp \
     Enemy.h \
     Game.h \
     Player.h \
-    Score.h \
     Health.h \
-    Button.h
+    Button.h \
+    Wave.h
 
 FORMS    +=
 
