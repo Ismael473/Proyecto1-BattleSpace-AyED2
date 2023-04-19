@@ -3,6 +3,9 @@
 
 #include <QGraphicsTextItem>
 
+/*!
+ * \brief The Wave class
+ */
 class Wave: public QGraphicsTextItem{
 public:
     Wave(QGraphicsItem * parent=0);

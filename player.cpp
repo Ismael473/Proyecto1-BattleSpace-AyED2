@@ -2,7 +2,7 @@
 #include "Bullet.h"
 #include "Enemy.h"
 #include "Game.h"
-#include "ListaEnemy.cpp"
+#include "ListaEnemy.h"
 #include <QDebug>
 #include <QKeyEvent>
 #include <QGraphicsScene>
@@ -15,16 +15,25 @@
 
 extern Game * game;
 using namespace std;
+ListaEnemy wave;
 
+/*!
+ * \brief Player::Player
+ * \param parent
+ * \return no retorna nada
+ */
 Player::Player(QGraphicsItem * parent): QGraphicsPixmapItem(parent){
 
-    setPixmap(QPixmap(":/images/Player.png"));
-    //scaled(100,100, Qt::KeepAspectRatio, Qt::FastTransformation);
+    setPixmap(QPixmap(":/images/Player.png")); // se le da una imagen al jugador
     setScale(0.3);
 
 
 }
-
+/*!
+ * \brief Player::keyPressEvent
+ * \param event, recibe un evento(una tecla presionada)
+ * \return no retorna nada
+ */
 void Player::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Up){
@@ -38,12 +47,18 @@ void Player::keyPressEvent(QKeyEvent *event)
         }
     }
     else if (event->key()== Qt::Key_Space){
-        Bullet * bullet = new Bullet();
+        Bullet * bullet = new Bullet(); // crea una bala y la muestra en pantalla
         bullet->setPos(x()+120,y()+67);
         scene()->addItem(bullet);
+
     }
 
 }
+/*!
+ * \brief Player::delay, agrega un retraso en la aparicion de oleadas
+ * \param no recibe parametros
+ * \return no retorna nada
+ */
 void Player::delay(){
 
     QTime dieTime = QTime::currentTime().addSecs(7);
@@ -51,88 +66,135 @@ void Player::delay(){
         QCoreApplication::processEvents(QEventLoop::AllEvents,100);
 }
 
+/*!
+ * \brief Player::spawnEasy, spawnea los enemigos de la dificultad facil
+ * \param no recibe parametros
+ * \return no retorna nada
+ */
 void Player::spawnEasy(){
-    ListaEnemy wave1;
-    ListaEnemy wave2;
-    ListaEnemy wave3;
-    ListaEnemy wave4;
-    ListaEnemy wave5;
+    ListaEnemy wave;
     int i;
     for(i = 0; i < 1; i++){
-        Enemy * enemy = new Enemy();
-        wave1.agregar(enemy);
+        Enemy * enemy = new Enemy(); // crea al enemigo y lo muestra en pantalla
+        wave.agregar(enemy);
         scene()->addItem(enemy);
     }
-    game->wave->aumentar();
+
+    game->wave->aumentar();// aumenta el contador de oleadas
     this->delay();
     for(i = 0; i < 2; i++){
         Enemy * enemy = new Enemy();
-        wave2.agregar(enemy);
+        wave.agregar(enemy);
         scene()->addItem(enemy);
     }
     game->wave->aumentar();
     this->delay();
     for(i = 0; i < 3; i++){
         Enemy * enemy = new Enemy();
-        wave3.agregar(enemy);
+        wave.agregar(enemy);
         scene()->addItem(enemy);
     }
     game->wave->aumentar();
     this->delay();
     for(i = 0; i < 4; i++){
         Enemy * enemy = new Enemy();
-        wave4.agregar(enemy);
+        wave.agregar(enemy);
         scene()->addItem(enemy);
     }
     game->wave->aumentar();
     this->delay();
     for(i = 0; i < 5; i++){
         Enemy * enemy = new Enemy();
-        wave5.agregar(enemy);
+        wave.agregar(enemy);
         scene()->addItem(enemy);
     }
-    /*
-    Nodo* actual = list.first;
-    while(actual != nullptr){
-        cout << actual->data << endl;
-        actual = actual->next;
-    }*/
+
 }
+/*!
+ * \brief Player::spawnMedium, crea los enemigos de la dificultad media
+ * \param no recibe parametros
+ * \return no retorna nada
+ */
 void Player::spawnMedium(){
-    ListaEnemy wave1;
-    ListaEnemy wave2;
-    ListaEnemy wave3;
-    ListaEnemy wave4;
-    ListaEnemy wave5;
+    ListaEnemy wave;
+
     int i;
     for(i = 0; i < 2; i ++){
         Enemy * enemy = new Enemy();
-        wave1.agregar(enemy);
+        wave.agregar(enemy);
         scene()->addItem(enemy);
     }
+    game->wave->aumentar();
     this->delay();
     for(i = 0; i < 3; i ++){
         Enemy * enemy = new Enemy();
-        wave2.agregar(enemy);
+        wave.agregar(enemy);
         scene()->addItem(enemy);
     }
+    game->wave->aumentar();
     this->delay();
     for(i = 0; i < 4; i ++){
         Enemy * enemy = new Enemy();
-        wave3.agregar(enemy);
+        wave.agregar(enemy);
         scene()->addItem(enemy);
     }
+    game->wave->aumentar();
     this->delay();
     for(i = 0; i < 5; i ++){
         Enemy * enemy = new Enemy();
-        wave4.agregar(enemy);
+        wave.agregar(enemy);
         scene()->addItem(enemy);
     }
+    game->wave->aumentar();
     this->delay();
     for(i = 0; i < 5; i ++){
         Enemy * enemy = new Enemy();
-        wave5.agregar(enemy);
+        wave.agregar(enemy);
         scene()->addItem(enemy);
     }
     this->delay();
+}
+/*!
+ * \brief Player::spawnHard, crea los enemigos de la dificultad dificil
+ * \param no recibe parametros
+ * \return no retorna nada
+ */
+void Player::spawnHard(){
+    ListaEnemy wave;
+    int i;
+    for(i = 0; i < 3; i ++){
+        Enemy * enemy = new Enemy();
+        wave.agregar(enemy);
+        scene()->addItem(enemy);
+    }
+    game->wave->aumentar();
+    this->delay();
+    for(i = 0; i < 3; i ++){
+        Enemy * enemy = new Enemy();
+        wave.agregar(enemy);
+        scene()->addItem(enemy);
+    }
+    game->wave->aumentar();
+    this->delay();
+    for(i = 0; i < 4; i ++){
+        Enemy * enemy = new Enemy();
+        wave.agregar(enemy);
+        scene()->addItem(enemy);
+    }
+    game->wave->aumentar();
+    this->delay();
+    for(i = 0; i < 6; i ++){
+        Enemy * enemy = new Enemy();
+        wave.agregar(enemy);
+        scene()->addItem(enemy);
+    }
+    game->wave->aumentar();
+    this->delay();
+    for(i = 0; i < 6; i ++){
+        Enemy * enemy = new Enemy();
+        wave.agregar(enemy);
+        scene()->addItem(enemy);
+    }
+    this->delay();
+
 }

@@ -20,7 +20,6 @@ SOURCES += main.cpp \
     player.cpp \
     Health.cpp \
     Button.cpp \
-    ListaEnemy.cpp \
     Wave.cpp
 
 HEADERS  += \
@@ -30,7 +29,8 @@ HEADERS  += \
     Player.h \
     Health.h \
     Button.h \
-    Wave.h
+    Wave.h \
+    ListaEnemy.h
 
 FORMS    +=
 

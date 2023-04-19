@@ -3,9 +3,14 @@
 
 #include <QGraphicsTextItem>
 
+/*!
+ * \brief The Health class
+ */
 class Health: public QGraphicsTextItem{
 public:
+    // Constructor
     Health(QGraphicsItem * parent=0);
+    // Metodos
     void reducir();
     int getHealth();
 private:

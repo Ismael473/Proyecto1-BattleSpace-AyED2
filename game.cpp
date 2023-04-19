@@ -5,51 +5,61 @@
 #include "Enemy.h"
 #include <Button.h>
 #include <QTimer>
-#include "ListaEnemy.cpp"
+#include "ListaEnemy.h"
 
 using namespace std;
 
+/*!
+ * \brief Game::Game
+ * \param parent
+ */
 Game::Game(QWidget *parent){
 
-    scene = new QGraphicsScene();
-    scene->setSceneRect(0,0,800,600);
-    setBackgroundBrush(QBrush(QImage(":/images/bg.jpg")));
+    scene = new QGraphicsScene(); // Se crea la escena donde se mostrar el juego
+    scene->setSceneRect(0,0,800,600); // Se le asignan valores al ancho y largo de la escena
+    setBackgroundBrush(QBrush(QImage(":/images/bg.jpg"))); // Se agrega el fondo del juego
 
     setScene(scene);
-    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(800, 600);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); //Se bloquean las barras horizontales y verticales
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff); // Esto para la escena no siga creciendo
+    setFixedSize(800, 600); // Se fija el ancho y largo de la pantalla
 
 
 }
 
-
+/*!
+ * \brief Game::easy, crea la dificultad facil del juego
+ * \param no recibe parametros
+ * \return no retorna valores
+ */
 void Game::easy(){
 
-    scene->clear();
+    scene->clear(); // Se limpia la pantall
 
-    player = new Player();
+    player = new Player(); // Se crea una instancia de la clase jugador
     player->setPos(0, 250);//Se usa para tener siempre al jugador centrado.
-    player->setFlag(QGraphicsItem::ItemIsFocusable);
+    player->setFlag(QGraphicsItem::ItemIsFocusable); // Con esto hacemos que el jugador se pueda mover
     player->setFocus();
 
-    scene->addItem(player);
+    scene->addItem(player); // Se agrega el jugador a la escena
 
-    wave = new Wave();
+    wave = new Wave(); // Se crea el contador de oleadas
     scene->addItem(wave);
 
-    health = new Health();
+    health = new Health(); // Se crea la vida del jugador
     health->setPos(health->x(), health->y()+25);
     scene->addItem(health);
 
-    player->spawnEasy();
+    player->spawnEasy(); // Con esto spawnean los enemigos de la dificultad facil
 
-    //QTimer * timer = new QTimer();
-    //QObject::connect(timer,SIGNAL(timeout()),player,SLOT(spawnEasy()));
-    //timer->start(2000);
+
 }
 
-
+/*!
+ * \brief Game::medium, se crea la dificultad media del juego.
+ * \param no recibe parametros
+ * \return no retorna nada
+ */
 void Game::medium(){
 
     scene->clear();
@@ -71,12 +81,38 @@ void Game::medium(){
     player->spawnMedium();
 
 }
+/*!
+ * \brief Game::hard, se crea la dificultad dificil del juego
+ * \param no recibe parametros
+ * \return no retorna nada
+ */
 void Game::hard(){
-    cout << "Hola" << endl;
-}
+    scene->clear();
 
+    player = new Player();
+    player->setPos(0, 250);//Se usa para tener siempre al jugador centrado.
+    player->setFlag(QGraphicsItem::ItemIsFocusable);
+    player->setFocus();
+
+    scene->addItem(player);
+
+    wave = new Wave();
+    scene->addItem(wave);
+
+    health = new Health();
+    health->setPos(health->x(), health->y()+25);
+    scene->addItem(health);
+
+    player->spawnHard();
+}
+/*!
+ * \brief Game::mainMenu, es la pantalla de inicio del juego
+ * \param no recibe parametros
+ * \return no retorna nada
+ */
 void Game::mainMenu()
 {
+    // Se crea el titulo del juego y se le da tamano y color
     QGraphicsTextItem * titleText = new QGraphicsTextItem(QString("BattleSpace"));
     QFont titleFont("comic sans", 50);
     titleText->setDefaultTextColor(Qt::red);
@@ -92,7 +128,7 @@ void Game::mainMenu()
     int exPos = this->width()/2 - easyButton->boundingRect().width()/2;
     int eyPos = 275;
     easyButton->setPos(exPos, eyPos);
-    connect(easyButton,SIGNAL(clicked()),this,SLOT(easy()));
+    connect(easyButton,SIGNAL(clicked()),this,SLOT(easy()));// Esto hace que cuando se presione el boton realice una accion
     scene->addItem(easyButton);
 
     Button * mediumButton = new Button(QString("Media"));
